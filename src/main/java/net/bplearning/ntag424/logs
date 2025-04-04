@@ -1,0 +1,131 @@
+// keyNum: 1
+
+/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64748:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -p /Users/stephen/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/stephen/.m2/repository/commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar:/Users/stephen/.m2/repository/org/apache/logging/log4j/log4j-core/2.24.3/log4j-core-2.24.3.jar:/Users/stephen/dev/workspaces/git/github.com/src/github.com/johnnyb/ntag424-java/target/classes -m net.bplearning.ntag424/net.bplearning.ntag424.DnaRunner
+23:49:01.098 [main] INFO  net.bplearning.ntag424.DnaRunner - 使用的读写器： ACS ACR122U
+23:49:01.104 [main] INFO  net.bplearning.ntag424.DnaRunner - 卡片ATR: 3b8180018080
+23:49:01.106 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90640000010000
+23:49:01.120 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 009100
+23:49:01.122 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9071000002000000
+23:49:01.145 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 86BAF973A071060D6CF3F2E037D5E22191AF
+23:49:01.151 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90AF00002050DC32E6E38EB580CDD76D563250BE790C8DDA74D849907A034E0746435B1DC200
+23:49:01.190 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: FC117696531CF8D6F0F4B21E05D765A9CC1D81BA679DDB153AB16D1B3DD97CBC9100
+23:49:01.193 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000904E6795D986C643F5000
+23:49:01.214 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 00F141E4EA0CABD1DB9100
+23:49:01.215 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9051000008720CDD82C5D4A92200
+23:49:01.242 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: AEEBCCA09A450AAD3B2D915B6096FAEF5735DAE80EBBAEA89100
+23:49:01.242 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.243 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Data before encryption: 0000000000000000000000000000000001AAB44413
+23:49:01.243 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90C4000029044E4313B74BB9728922ED72E3D5E06C5FB3462F31A453DBEB6403862E74E95EAC4B2D3A3B78D1404200
+23:49:01.283 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 0AEB517781E731489100
+23:49:01.283 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data:
+23:49:01.283 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9064000009036BC5014F47D477C800
+23:49:01.304 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 0000A5EE14A56CD1159100
+23:49:01.304 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9051000008BDC883048395969500
+23:49:01.331 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 32F4B1FFE5C5B8EDAE29FFBF6E2F2B8BAF0D9E5C0D306E8A9100
+23:49:01.332 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.332 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Data before encryption: CE34ECD8C9594656FB528E5A5C18FBE401EEEDA70E
+23:49:01.333 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90C40000290374978A25CD2B5435C146A4C54248854D5AC4EB0A04638276FAFAD54D1B21AE64F2C79F717E49D4DA00
+23:49:01.373 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: E3D8ABC948F807F29100
+23:49:01.373 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data:
+23:49:01.374 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000902A2609FCCA3F292CA00
+23:49:01.394 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 00C916D4F824E56EBC9100
+23:49:01.395 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 905100000806314A307A5B3EAD00
+23:49:01.422 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: C5FC8F85284F3F442ADC548662BD2248DC80349B0A556CEC9100
+23:49:01.423 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.423 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Data before encryption: 0000000000000000000000000000000001AAB44413
+23:49:01.424 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90C400002902B7C00B3D9639C1EE5E5F2BA3D5A59E2CBD66046414A2F595E73F11BB37350F9DFE297CBC93F0B68F00
+23:49:01.464 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: A48F428DB7D453CD9100
+23:49:01.464 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data:
+23:49:01.465 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000901806E23958575D95800
+23:49:01.485 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 0092F4BF7D9050AD229100
+23:49:01.486 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90510000083B6B8C44ED7F5DBF00
+23:49:01.513 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 06AE7AAAFE04D166275C015577FA690F30CCD0A067B9D0E69100
+23:49:01.514 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.514 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Data before encryption: 0000000000000000000000000000000001AAB44413
+23:49:01.515 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90C4000029018908423303181852B433D80626FA00574F5BB3BBA3D56C7667046A1153EB60F595ADD8F9894FE8CF00
+23:49:01.555 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 32E3C3CA6E10A5AF9100
+23:49:01.556 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data:
+23:49:01.556 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000900A5E0E6804CDAC85700
+23:49:01.579 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 0006462CB7E6721B489100
+23:49:01.580 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90510000088F47E28EA5611C3500
+23:49:01.607 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: F2B7483970CEE57F405F4674BEA2D823DEB00175BA721BED9100
+23:49:01.608 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.608 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Data before encryption: 0000000000000000000000000000000001
+23:49:01.608 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90C40000290055E771C66E222E3EDB90FFD0F5D9EAAB104CB7B9C1A673AA4D1A5079718D19D2121E0780E953A01800
+23:49:01.644 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 9100
+23:49:01.644 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data:
+23:49:01.644 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9071000002000000
+23:49:01.667 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 511C43020C06664E227A1F846A3BF4E591AF
+23:49:01.667 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90AF00002073963F6949DF637A3826857C2B379CF71D6EE892AC22B56C81C42EAB58B2E2F800
+23:49:01.706 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: B9E024BB4C36312F372C17F022D0DAF0EC5FD00D0994A6296A96DA18A803500D9100
+23:49:01.711 [main] INFO  net.bplearning.ntag424.DnaRunner - KeySet synchronized:
+ {LRP:false, metaKey:2, macFileKey:3
+keys:[
+0: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+1: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+2: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+3: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=true, SystemIdentifier=74657374696e67}
+4: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+]
+}
+23:49:01.712 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9071000002010000
+23:49:01.734 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: F1DF44F6DDBD220DB3D819B3925EE51B91AF
+23:49:01.735 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90AF0000207B137A06C7E4BEB35DCDF3828AA2447EB5FB55C5313BF19D6EB1666FA32C3AFE00
+23:49:01.774 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 2A62D767D6EEC55D24B5DD61BD2941F1E59E67A3B39F30664E64106AF173FED39100
+23:49:01.774 [main] INFO  net.bplearning.ntag424.DnaRunner - login success
+23:49:01.775 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9051000008BD31AE4BA9309E6100
+23:49:01.802 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 4D530A61B3C3E10FB50EC4C5A05932739A070A19310A00FB9100
+23:49:01.803 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+23:49:01.803 [main] INFO  net.bplearning.ntag424.DnaRunner - Card UID: 047f8d6a0b1090
+
+Process finished with exit code 0
+
+
+
+===========
+
+// keyNo: 0
+
+/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=65283:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -p /Users/stephen/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/stephen/.m2/repository/commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar:/Users/stephen/.m2/repository/org/apache/logging/log4j/log4j-core/2.24.3/log4j-core-2.24.3.jar:/Users/stephen/dev/workspaces/git/github.com/src/github.com/johnnyb/ntag424-java/target/classes -m net.bplearning.ntag424/net.bplearning.ntag424.DnaRunner
+00:53:53.353 [main] INFO  net.bplearning.ntag424.DnaRunner - 使用的读写器： ACS ACR122U
+00:53:53.360 [main] INFO  net.bplearning.ntag424.DnaRunner - 卡片ATR: 3b8180018080
+00:53:53.361 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Beginning communication
+00:53:53.362 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 00A4000C02E11000
+00:53:53.376 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 9000
+00:53:53.377 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90640000010000
+00:53:53.391 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 019100
+00:53:53.393 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9071000002000000
+00:53:53.416 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 5EA1EFE11F98BDC3E2EDBCBD6926F3BD91AF
+00:53:53.422 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90AF000020F8199705D1F6ADE7EBEFFCCB7D1C2EB583423542F109F60AC8589DF6270E10AA00
+00:53:53.462 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 37DACD8F37023ED44DDBECA7FA0B20E8E614780CA689CA90F96B6521C9B1B20D9100
+00:53:53.465 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9064000009045705BB0020711C3D00
+00:53:53.486 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 019BE3CF2FB24725679100
+00:53:53.486 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90640000090319369170FBBE84DA00
+00:53:53.507 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 01F3CBB02FF59CA9749100
+00:53:53.508 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000902722EEED8B174B06100
+00:53:53.528 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 01AD7D1F2137EAD24A9100
+00:53:53.529 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 906400000901647E01C016FED28C00
+00:53:53.550 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 01700838CCA20FAD049100
+00:53:53.550 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90640000090018B93C4BC2552AC800
+00:53:53.571 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 01B813AE74594EE75E9100
+00:53:53.575 [main] INFO  net.bplearning.ntag424.DnaRunner - KeySet synchronized:
+ {LRP:false, metaKey:2, macFileKey:3
+keys:[
+0: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+1: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+2: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+3: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=true, SystemIdentifier=74657374696e67}
+4: KeyInfo{version=1, key=0x00000000000000000000000000000000, diversifyKeys=false}
+]
+}
+00:53:53.575 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 9071000002010000
+00:53:53.598 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 20C615B549BD8B62937A68A140D5090B91AF
+00:53:53.598 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90AF00002041A4773309F2FDE835FF069BA177CCA624CC60413C3A7E59F209E2FCFD2E793F00
+00:53:53.638 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 6A4B1B0644395A678436ED1874ED34830DE812CE340A6793720C0DEFD74FAE599100
+00:53:53.638 [main] INFO  net.bplearning.ntag424.DnaRunner - login success
+00:53:53.639 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesSending: 90510000080E667FA9F113DC1400
+00:53:53.666 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] BytesReceived: 458349DE5A0FC061FBDE3FB4B8D279B906FDBB2DF91F69159100
+00:53:53.666 [main] INFO  net.bplearning.ntag424.DnaRunner - [DNACOMM] Decrypted data: 047F8D6A0B1090800000000000000000
+00:53:53.666 [main] INFO  net.bplearning.ntag424.DnaRunner - Card UID: 047f8d6a0b1090
+
+Process finished with exit code 0

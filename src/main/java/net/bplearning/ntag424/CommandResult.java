@@ -28,6 +28,10 @@ public class CommandResult {
                 && (status2 == SUCCESS || status2 == ADDITIONAL_FRAME);
     }
 
+    public boolean isStatuses(byte status1, byte status2) {
+        return this.status1 == status1 && this.status2 == status2;
+    }
+
     public void throwUnlessSuccessful() throws IOException {
         if (!isSuccessStatus()) {
             if (status1 == MAC_OK) {

@@ -11,6 +11,7 @@ import net.bplearning.ntag424.exception.NoSuchKeyException;
 import net.bplearning.ntag424.sdm.NdefTemplateMaster;
 import net.bplearning.ntag424.sdm.SDMSettings;
 import net.bplearning.ntag424.util.ThrowableFunction;
+import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,7 @@ public class DnaRunner {
     private Card card;
     DnaCommunicator comm;
 
-    private DnaCommunicator connect() throws CardException {
+    private DnaCommunicator connect() throws CardException, IOException {
         // 获取终端工厂
         TerminalFactory factory = TerminalFactory.getDefault();
         // 获取读写器列表
@@ -52,6 +53,8 @@ public class DnaRunner {
         DnaCommunicator communicator = new DnaCommunicator();
         communicator.setTransceiver(transceiver);
         communicator.setLogger((info) -> logger.info("[DNACOMM] " + info));
+        communicator.beginCommunication();
+//        assertArrayEquals("Make sure we get the proper command to start communication", new byte[] {0x00,(byte)0xa4,0x00,0x0c,0x02,(byte)0xe1,0x10,0x00}, transceiver.recordedRequests.get(0));
         this.comm = communicator;
         return communicator;
     }
@@ -73,34 +76,39 @@ public class DnaRunner {
         keySet.setUsesLrp(false);
 
         // This is the "master" key
-        KeyInfo key0 = new KeyInfo();
+        KeyInfo key0 = new KeyInfo(1);
         key0.diversifyKeys = false;
         key0.key = Ntag424.FACTORY_KEY;
+//        try {
+//            key0.key = Hex.decodeHex("0102030405060708090a0b0c0d0e0f10");
+//        } catch (DecoderException e) {
+//            throw new RuntimeException(e);
+//        }
         keySet.setKey(Permissions.ACCESS_KEY0, key0);
 
         // No standard usage
-        KeyInfo key1 = new KeyInfo();
+        KeyInfo key1 = new KeyInfo(1);
         key1.diversifyKeys = false;
         key1.key = Ntag424.FACTORY_KEY;
         keySet.setKey(Permissions.ACCESS_KEY1, key1);
 
         // Usually used as a meta read key for encrypted PICC data
-        KeyInfo key2 = new KeyInfo();
+        KeyInfo key2 = new KeyInfo(1);
         key2.diversifyKeys = false;
         key2.key = Ntag424.FACTORY_KEY;
         keySet.setKey(Permissions.ACCESS_KEY2, key2);
 
         // Usually used as the MAC and encryption key.
         // The MAC key usually has the diversification information setup.
-        KeyInfo key3 = new KeyInfo();
+        KeyInfo key3 = new KeyInfo(1);
         key3.diversifyKeys = true;
         key3.systemIdentifier = "testing".getBytes(StandardCharsets.UTF_8); // systemIdentifier is usually a hex-encoded string based on the name of your intended use.
         key3.version = 1; // Since it is not a factory key (it is *based* on a factory key, but underwent diversification), need to set to a version number other than 0.
         key3.key = Ntag424.FACTORY_KEY;
-
         // No standard usage
         keySet.setKey(Permissions.ACCESS_KEY3, key3);
-        KeyInfo key4 = new KeyInfo();
+
+        KeyInfo key4 = new KeyInfo(1);
         key4.diversifyKeys = false;
         key4.key = Ntag424.FACTORY_KEY;
         keySet.setKey(Permissions.ACCESS_KEY4, key4);
@@ -158,7 +166,6 @@ public class DnaRunner {
 //        throw new IOException("No such key");
     }
 
-
     public static void main(String[] args) {
         try {
             DnaRunner runner = new DnaRunner();
@@ -170,12 +177,13 @@ public class DnaRunner {
             // Synchronize keys first
             KeySet keySet = runner.getKeySet();
             try {
-                keySet.synchronizeKeys(communicator);
+                boolean ok = keySet.synchronizeKeys(communicator);
+                logger.info("KeySet synchronized: {}\n {}", ok, keySet);
             } catch (IOException e) {
                 logger.warn("KeySet synchronization failed", e);
             }
 
-            int keyNo = 0;
+            int keyNo = 1;
 
             // Authenticate with a key.  If you are in LRP mode (Requires permanently changing tag settings), uncomment the LRP version instead.
             // if(LRPEncryptionMode.authenticateLRP(communicator, 0, Constants.FACTORY_KEY)) {
