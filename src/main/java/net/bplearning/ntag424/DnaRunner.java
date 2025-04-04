@@ -6,6 +6,8 @@ import net.bplearning.ntag424.command.*;
 import net.bplearning.ntag424.constants.Ntag424;
 import net.bplearning.ntag424.constants.Permissions;
 import net.bplearning.ntag424.encryptionmode.AESEncryptionMode;
+import net.bplearning.ntag424.exception.Cla90Exception;
+import net.bplearning.ntag424.exception.NoSuchKeyException;
 import net.bplearning.ntag424.sdm.NdefTemplateMaster;
 import net.bplearning.ntag424.sdm.SDMSettings;
 import net.bplearning.ntag424.util.ThrowableFunction;
@@ -23,6 +25,7 @@ public class DnaRunner {
 //    private DnaCommunicator communicator;
 
     private Card card;
+    DnaCommunicator comm;
 
     private DnaCommunicator connect() throws CardException {
         // 获取终端工厂
@@ -49,6 +52,7 @@ public class DnaRunner {
         DnaCommunicator communicator = new DnaCommunicator();
         communicator.setTransceiver(transceiver);
         communicator.setLogger((info) -> logger.info("[DNACOMM] " + info));
+        this.comm = communicator;
         return communicator;
     }
 
@@ -139,64 +143,88 @@ public class DnaRunner {
         return sb.toString();
     }
 
+    public int getKeyVersion() throws IOException {
+        for (int i = 0; i < 5; i++) {
+            try {
+                int kv = GetKeyVersion.run(this.comm, i);
+                logger.info("Key {} version {}", i, kv);
+            } catch (NoSuchKeyException e) {
+                logger.warn("Key {} not found", i);
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        return -1;
+//        throw new IOException("No such key");
+    }
+
 
     public static void main(String[] args) {
         try {
             DnaRunner runner = new DnaRunner();
             DnaCommunicator communicator = runner.connect();
 
+//            int kv = runner.getKeyVersion();
+//            logger.info("KeyVersion: " + kv);
+
             // Synchronize keys first
             KeySet keySet = runner.getKeySet();
-            keySet.synchronizeKeys(communicator);
+            try {
+                keySet.synchronizeKeys(communicator);
+            } catch (IOException e) {
+                logger.warn("KeySet synchronization failed", e);
+            }
+
+            int keyNo = 0;
 
             // Authenticate with a key.  If you are in LRP mode (Requires permanently changing tag settings), uncomment the LRP version instead.
             // if(LRPEncryptionMode.authenticateLRP(communicator, 0, Constants.FACTORY_KEY)) {
-            if (AESEncryptionMode.authenticateEV2(communicator, 0, keySet.getKey(0).key)) { // Assumes key0 is non-diversified
+            if (AESEncryptionMode.authenticateEV2(communicator, keyNo, keySet.getKey(keyNo).key)) { // Assumes key0 is non-diversified
                 logger.info("login success");
                 byte[] cardUid = GetCardUid.run(communicator);
                 logger.info("Card UID: " + Hex.encodeHexString(cardUid));
-//                int keyVersion = GetKeyVersion.run(communicator, 0);
-//                logger.info("Key 0 version: " + keyVersion);
-
-                // Doing this will set LRP mode for all future authentications
-                // SetCapabilities.run(communicator, true);
-
-                // Get the NDEF file settings
-                FileSettings ndeffs = GetFileSettings.run(communicator, Ntag424.NDEF_FILE_NUMBER);
-                logger.info("Debug NDEF: " + runner.debugStringForFileSettings(ndeffs));
-
-                // Secret data
-                byte[] secretData = new byte[]{
-                        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
-                };
-
-                // Set the access keys and options
-                SDMSettings sdmSettings = new SDMSettings();
-                sdmSettings.sdmMetaReadPerm = Permissions.ACCESS_KEY2;     // Set to a key to get encrypted PICC data (usually non-diversified since you don't know the UID until after decryption)
-                sdmSettings.sdmFileReadPerm = Permissions.ACCESS_KEY3;     // Used to create the MAC and Encrypt FileData
-                sdmSettings.sdmOptionUid = true;
-                sdmSettings.sdmOptionReadCounter = true;
-
-                // NDEF SDM formatter helper - uses a template to write SDMSettings and get file data
-                NdefTemplateMaster master = new NdefTemplateMaster();
-                master.usesLRP = false;
-
-                byte[] ndefRecord = master.generateNdefTemplateFromUrlString("https://www.example.com/{PICC}/{FILE}/{MAC}", secretData, sdmSettings);
-                // This link (not by me) has a handy decoder if you are using factory keys (we are using a diversified factory key, so this will not work unless you change that in the keyset):
-                // byte[] ndefRecord = master.generateNdefTemplateFromUrlString("https://sdm.nfcdeveloper.com/tagpt?uid={UID}&ctr={COUNTER}&cmac={MAC}", sdmSettings);
-
-                // Write the record to the file
-                WriteData.run(communicator, Ntag424.NDEF_FILE_NUMBER, ndefRecord);
-
-                // Set the general NDEF permissions
-                ndeffs.readPerm = Permissions.ACCESS_EVERYONE;
-                ndeffs.writePerm = Permissions.ACCESS_KEY0;
-                ndeffs.readWritePerm = Permissions.ACCESS_KEY3; // backup key
-                ndeffs.changePerm = Permissions.ACCESS_KEY0;
-                ndeffs.sdmSettings = sdmSettings; // Use the SDM settings we just setup
-                logger.info("New Ndef Settings: " + runner.debugStringForFileSettings(ndeffs));
-                ChangeFileSettings.run(communicator, Ntag424.NDEF_FILE_NUMBER, ndeffs);
-                logger.info("Tag Sync Successful");
+////                int keyVersion = GetKeyVersion.run(communicator, 0);
+////                logger.info("Key 0 version: " + keyVersion);
+//
+//                // Doing this will set LRP mode for all future authentications
+//                // SetCapabilities.run(communicator, true);
+//
+//                // Get the NDEF file settings
+//                FileSettings ndeffs = GetFileSettings.run(communicator, Ntag424.NDEF_FILE_NUMBER);
+//                logger.info("Debug NDEF: " + runner.debugStringForFileSettings(ndeffs));
+//
+//                // Secret data
+//                byte[] secretData = new byte[]{
+//                        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+//                };
+//
+//                // Set the access keys and options
+//                SDMSettings sdmSettings = new SDMSettings();
+//                sdmSettings.sdmMetaReadPerm = Permissions.ACCESS_KEY2;     // Set to a key to get encrypted PICC data (usually non-diversified since you don't know the UID until after decryption)
+//                sdmSettings.sdmFileReadPerm = Permissions.ACCESS_KEY3;     // Used to create the MAC and Encrypt FileData
+//                sdmSettings.sdmOptionUid = true;
+//                sdmSettings.sdmOptionReadCounter = true;
+//
+//                // NDEF SDM formatter helper - uses a template to write SDMSettings and get file data
+//                NdefTemplateMaster master = new NdefTemplateMaster();
+//                master.usesLRP = false;
+//
+//                byte[] ndefRecord = master.generateNdefTemplateFromUrlString("https://www.example.com/{PICC}/{FILE}/{MAC}", secretData, sdmSettings);
+//                // This link (not by me) has a handy decoder if you are using factory keys (we are using a diversified factory key, so this will not work unless you change that in the keyset):
+//                // byte[] ndefRecord = master.generateNdefTemplateFromUrlString("https://sdm.nfcdeveloper.com/tagpt?uid={UID}&ctr={COUNTER}&cmac={MAC}", sdmSettings);
+//
+//                // Write the record to the file
+//                WriteData.run(communicator, Ntag424.NDEF_FILE_NUMBER, ndefRecord);
+//
+//                // Set the general NDEF permissions
+//                ndeffs.readPerm = Permissions.ACCESS_EVERYONE;
+//                ndeffs.writePerm = Permissions.ACCESS_KEY0;
+//                ndeffs.readWritePerm = Permissions.ACCESS_KEY3; // backup key
+//                ndeffs.changePerm = Permissions.ACCESS_KEY0;
+//                ndeffs.sdmSettings = sdmSettings; // Use the SDM settings we just setup
+//                logger.info("New Ndef Settings: " + runner.debugStringForFileSettings(ndeffs));
+//                ChangeFileSettings.run(communicator, Ntag424.NDEF_FILE_NUMBER, ndeffs);
+//                logger.info("Tag Sync Successful");
             } else {
                 logger.info("Login unsuccessful");
                 logger.info("invalid application key");

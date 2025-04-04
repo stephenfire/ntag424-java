@@ -35,7 +35,7 @@ public class KeyInfo {
 	/** A list of old keys that have been used.  Used for synchronizing to a new key set. */
 	public List<KeyInfo> oldKeys = new LinkedList<>();
 
-	/** Whether or not to diversify keys */
+	/** Whether to diversify keys */
 	public boolean diversifyKeys = false;
 
 	/** The current key version */
