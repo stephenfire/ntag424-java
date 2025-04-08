@@ -25,7 +25,7 @@ public final class ByteUtil {
         return newArray;
     }
 
-    /** Returns whether or not two byte arrays are equal. */
+    /** Returns whether two byte arrays are equal. */
     public static boolean arraysEqual(byte[] a1, byte[] a2) {
         if(a1 == null && a2 == null) {
             return true; // Both null, both the same
