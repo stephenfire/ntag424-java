@@ -9,10 +9,14 @@ import org.bouncycastle.crypto.macs.CMac;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+
+import static org.junit.Assert.assertArrayEquals;
 
 public class CMACTest {
 
@@ -27,11 +31,26 @@ public class CMACTest {
         return cmac.perform(message, 16);
     }
 
+    private static byte[] calculate1(SecretKeySpec key, byte[] message) throws GeneralSecurityException {
+        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+        cipher.init(Cipher.DECRYPT_MODE, key, net.bplearning.ntag424.constants.Crypto.zeroIVPS);
+
+        AESCMAC cmac1 = new AESCMAC(cipher, key);
+        return calculate1(cmac1, message);
+    }
+
     private static byte[] calculate2(CMac cmac, byte[] message) {
         cmac.update(message, 0, message.length);
         byte[] result = new byte[cmac.getMacSize()];
         cmac.doFinal(result, 0);
         return result;
+    }
+
+    private static byte[] calculate2(byte[] keyBytes, byte[] message) {
+        CMac cmac2 = new CMac(AESEngine.newInstance());
+        CipherParameters keyParam = new KeyParameter(keyBytes);
+        cmac2.init(keyParam);
+        return calculate2(cmac2, message);
     }
 
     @Test
@@ -55,8 +74,15 @@ public class CMACTest {
             int msgLength = r.nextInt(128);
             byte[] msg = randomKey(msgLength);
             byte[] m1 = calculate1(cmac1, msg);
-            byte[] m2 = calculate2(cmac2, msg);
-            System.out.printf("msg: %s =>\nm1: %s\nm2: %s\n", Hex.encodeHexString(msg), Hex.encodeHexString(m1), Hex.encodeHexString(m2));
+            byte[] m2 = calculate1(key, msg);
+            byte[] m3 = calculate2(cmac2, msg);
+            byte[] m4 = calculate2(keyBytes, msg);
+            System.out.printf("msg: %s =>\nm1: %s\nm2: %s\nm3: %s\nm4: %s\n",
+                    Hex.encodeHexString(msg), Hex.encodeHexString(m1), Hex.encodeHexString(m2),
+                    Hex.encodeHexString(m3), Hex.encodeHexString(m4));
+            assertArrayEquals("m1 not match with m2", m1, m2);
+            assertArrayEquals("m2 not match with m3", m2, m3);
+            assertArrayEquals("m3 not match with m4", m3, m4);
         }
     }
 }
