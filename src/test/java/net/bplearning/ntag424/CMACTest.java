@@ -9,11 +9,9 @@ import org.bouncycastle.crypto.macs.CMac;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import static org.junit.Assert.assertArrayEquals;
